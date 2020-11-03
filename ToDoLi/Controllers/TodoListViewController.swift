@@ -9,24 +9,31 @@ class TodoListViewController: UITableViewController {
     
     var itemArray = [Item] ()
     
+    var selectedCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist"))
-        loadItems()
     }
     
     
     //MARK: - Tableview Datasource Methods
-    
+    //Set number of row
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
     }
-    
+    //Set cells in the table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = itemArray[indexPath.row]
         
+        //Create reusable cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        //Set cell text - title of titemArray, set accessory
         cell.textLabel?.text = item.title
         
         cell.accessoryType = item.done ? .checkmark : .none
@@ -37,10 +44,10 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print(itemArray[indexPath.row])
         
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-//
-        
+        //        context.delete(itemArray[indexPath.row])
+        //        itemArray.remove(at: indexPath.row)
+        //
+        // Change state if row selected
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         saveItems()
@@ -51,7 +58,7 @@ class TodoListViewController: UITableViewController {
     //MARK: - Add New Items
     
     @IBAction func addButtunPressed(_ sender: UIBarButtonItem) {
-        
+        //Create alert with action and textfield
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Add new Todoye Item", message: "", preferredStyle: .alert)
@@ -59,10 +66,11 @@ class TodoListViewController: UITableViewController {
             if textField.text == "" {
                 textField.placeholder = "Print something"
             } else {
-                
+                //Add new item to array, set category
                 let newItem = Item(context: self.context)
                 newItem.title = textField.text!
                 newItem.done = false
+                newItem.parentCategory = self.selectedCategory
                 self.itemArray.append(newItem)
                 
                 self.saveItems()
@@ -80,7 +88,7 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         
     }
- //MARK: - Save and Load Data
+    //MARK: - Save and Load Data
     
     func saveItems() {
         
@@ -94,15 +102,15 @@ class TodoListViewController: UITableViewController {
     }
     
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-            
-            do {
-                itemArray = try context.fetch(request)
-            } catch {
-                print("Error fetchin data from context \(error)")
-            }
-            
-            tableView.reloadData()
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetchin data from context \(error)")
         }
+        
+        tableView.reloadData()
+    }
     
 }
 
@@ -115,10 +123,10 @@ extension TodoListViewController: UISearchBarDelegate {
         print(searchBar.text!)
         //Create predicate to filter items, no sensetive
         request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
- 
+        
         //Sort by alphbet
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-
+        
         loadItems(with: request)
         
     }
@@ -126,13 +134,14 @@ extension TodoListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             loadItems()
+            //resign responder, when there is no text
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
             
         }
     }
-
+    
     
 }
 
