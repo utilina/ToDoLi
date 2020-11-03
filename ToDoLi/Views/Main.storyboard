@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="408.69565217391306" y="53.571428571428569"/>
         </scene>
-        <!--Todoey-->
+        <!--ToDoLi-->
         <scene sceneID="Ssc-Xa-YeS">
             <objects>
                 <tableViewController id="w9m-Xd-mhk" customClass="CategoryViewController" customModule="ToDoLi" customModuleProvider="target" sceneMemberID="viewController">
@@ -85,11 +85,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="b5B-Un-xY6">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" id="b5B-Un-xY6">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b5B-Un-xY6" id="c6P-Eq-RmO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -99,7 +99,7 @@
                             <outlet property="delegate" destination="w9m-Xd-mhk" id="ewJ-xi-xps"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="aW0-Qm-Vev">
+                    <navigationItem key="navigationItem" title="ToDoLi" id="aW0-Qm-Vev">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SSq-lU-Xpo">
                             <color key="tintColor" red="0.1169464365" green="0.26270556449999999" blue="0.28319394590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
