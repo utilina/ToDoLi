@@ -20,7 +20,6 @@ class CategoryViewController: UITableViewController {
         
         loadNames()
         
-        
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
