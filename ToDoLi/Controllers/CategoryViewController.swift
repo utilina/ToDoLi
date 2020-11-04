@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
     
@@ -15,10 +15,12 @@ class CategoryViewController: UITableViewController {
     
     var categoryArray = [Category] ()
     
+    let realm = try! Realm()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadNames()
+//        loadNames()
         
     }
     
@@ -27,10 +29,10 @@ class CategoryViewController: UITableViewController {
         let alert = UIAlertController(title: "New name", message: "Add new name", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { action in
             if textField.text != "" {
-                let newName = Category(context: self.context)
-                newName.name = textField.text!
-                self.categoryArray.insert(newName, at: 0)
-                self.saveNames()
+                let newCategory = Category()
+                newCategory.name = textField.text!
+                self.categoryArray.insert(newCategory, at: 0)
+                self.save(category: newCategory)
                 
             }
         }
@@ -71,9 +73,11 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - Data manupulation methods
     
-    func saveNames() {
+    func save(category: Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
             
         } catch {
             print(error.localizedDescription)
@@ -83,14 +87,14 @@ class CategoryViewController: UITableViewController {
         
     }
     
-    func loadNames(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
-        
-        do {
-            categoryArray = try context.fetch(request)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-    }
+//    func loadNames(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+//
+//        do {
+//            categoryArray = try context.fetch(request)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//
+//    }
     
 }
