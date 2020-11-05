@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
 class CategoryViewController: SwipeTableViewController {
     
@@ -16,10 +17,18 @@ class CategoryViewController: SwipeTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
+        
         loadNames()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let navBar = navigationController?.navigationBar else {fatalError("Fatal error")}
+        navBar.backgroundColor = UIColor.white
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.black]
+        navBar.tintColor = UIColor.black
+    }
+
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
@@ -28,6 +37,7 @@ class CategoryViewController: SwipeTableViewController {
             if textField.text != "" {
                 let newCategory = Category()
                 newCategory.name = textField.text!
+                newCategory.color = UIColor.randomFlat().hexValue()
                 self.save(category: newCategory)
                 
             }
@@ -50,7 +60,11 @@ class CategoryViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "Add Category"
+        if let categories = categoryArray?[indexPath.row] {
+        cell.textLabel?.text = categories.name
+        cell.backgroundColor = UIColor(hexString: categories.color)
+        cell.textLabel?.textColor = ContrastColorOf(UIColor(hexString: categories.color)!, returnFlat: true)
+        }
         return cell
     }
     
@@ -58,6 +72,7 @@ class CategoryViewController: SwipeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToItems", sender: self)
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

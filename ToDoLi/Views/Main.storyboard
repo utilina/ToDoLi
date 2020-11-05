@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="04V-RP-Ehy">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,12 +44,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="4xY-iI-cDN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PWS-tw-2IP">
-                            <color key="tintColor" red="0.1169464365" green="0.26270556449999999" blue="0.28319394590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addButtunPressed:" destination="YfV-Mf-iHT" id="0bd-uG-Hhs"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="m4T-9C-iRm" id="C67-a0-SyX"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4P-mq-5f3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,14 +62,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="04V-RP-Ehy" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="W8t-vt-feb">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="W8t-vt-feb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.1169464365" green="0.26270556449999999" blue="0.28319394590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" name="Background color"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Baskerville-Bold" family="Baskerville" pointSize="20"/>
-                            <color key="textColor" name="Title color"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -106,9 +104,8 @@
                             <outlet property="delegate" destination="w9m-Xd-mhk" id="ewJ-xi-xps"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDoLi" id="aW0-Qm-Vev">
+                    <navigationItem key="navigationItem" title="ToDoLi" largeTitleDisplayMode="always" id="aW0-Qm-Vev">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="SSq-lU-Xpo">
-                            <color key="tintColor" red="0.1169464365" green="0.26270556449999999" blue="0.28319394590000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="w9m-Xd-mhk" id="V54-4b-Nf1"/>
                             </connections>
@@ -124,12 +121,6 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="Background color">
-            <color red="0.7720000147819519" green="0.98799997568130493" blue="0.87699997425079346" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Title color">
-            <color red="0.11699999868869781" green="0.2630000114440918" blue="0.28299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
