@@ -100,7 +100,7 @@ class TodoListViewController: SwipeTableViewController {
         //Create alert with action and textfield
         var textField = UITextField()
         
-        let alert = UIAlertController(title: "Add new Todoye Item", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             if textField.text == "" {
                 textField.placeholder = "Print something"
